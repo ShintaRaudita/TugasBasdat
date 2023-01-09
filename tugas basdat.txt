@@ -1,0 +1,125 @@
+-- CREATE DATABASE shintaraudita_3;
+
+/*
+CREATE TABLE pembeli(
+	id_pembeli INT NOT NULL,
+    nama_pembeli VARCHAR(255),
+    alamat TEXT(255),
+    no_telp INT(13),
+    id_toko INT,
+    id_barang INT,
+    PRIMARY KEY (id_pembeli) 
+);
+*/
+-- DROP TABLE pembeli;
+
+/*
+CREATE TABLE toko(
+	id_toko INT NOT NULL,
+    nama_toko VARCHAR(255),
+    alamat TEXT(255),
+    no_telp INT(13),
+    PRIMARY KEY (id_toko) 
+);
+*/
+
+
+/*
+CREATE TABLE barang(
+	id_barang INT NOT NULL,
+    nama_barang VARCHAR(255),
+    harga INT(100),
+    stock INT(100),
+    id_toko INT,
+    PRIMARY KEY (id_barang) 
+);
+*/
+
+
+/*
+ALTER TABLE barang 
+ADD CONSTRAINT FK_id_toko 
+FOREIGN KEY (id_toko) REFERENCES toko(id_toko);
+*/
+
+
+/*
+ALTER TABLE pembeli
+ADD CONSTRAINT FK_id_toko2 
+FOREIGN KEY (id_toko) REFERENCES toko(id_toko);
+*/
+
+
+/*
+ALTER TABLE pembeli
+ADD CONSTRAINT FK_id_barang 
+FOREIGN KEY (id_barang) REFERENCES barang(id_barang);
+*/
+
+
+/*
+INSERT INTO pembeli
+VALUES
+	(1, "pembeli a", "jalan a", 12345, 1, 5),
+    (2, "pembeli b", "jalan b", 678910, 1, 5),
+    (3, "pembeli c", "jalan c", 111213, 2, 4),
+    (4, "pembeli d", "jalan d", 141516, 2, 4),
+    (5, "pembeli e", "jalan e", 171819, 3, 3),
+    (6, "pembeli f", "jalan f", 123455, 3, 3),
+    (7, "pembeli g", "jalan g", 123445, 4, 2),
+    (8, "pembeli h", "jalan h", 123345, 4, 2),
+    (9, "pembeli i", "jalan i", 122345, 5, 1),
+    (10, "pembeli j", "jalan j", 112345, 5, 1);
+*/
+
+
+/*
+INSERT INTO toko
+VALUES
+	(1, "toko a", "jalan a", 12345),
+    (2, "toko b", "jalan b", 678910),
+    (3, "toko c", "jalan c", 111213),
+    (4, "toko d", "jalan d", 141516),
+    (5, "toko e", "jalan e", 171819);
+*/
+
+
+/*
+INSERT INTO barang
+VALUES
+	(1, "barang a", 10000, 10, 5),
+    (2, "barang b", 20000, 40, 4),
+    (3, "barang c", 30000, 20, 3),
+    (4, "barang d", 40000, 30, 2),
+    (5, "barang e", 50000, 50, 1);
+*/
+
+/*
+SELECT toko.nama_toko, barang.nama_barang, barang.harga
+FROM toko
+INNER JOIN barang
+ON toko.id_toko=barang.id_toko;
+*/
+
+
+/*
+SELECT pembeli.nama_pembeli, toko.nama_toko, barang.nama_barang
+FROM ((pembeli
+INNER JOIN toko ON pembeli.id_toko = toko.id_toko)
+INNER JOIN barang ON pembeli.id_barang = barang.id_barang);
+*/
+
+/*
+SELECT pembeli.nama_pembeli, pembeli.alamat, barang.nama_barang
+FROM pembeli
+LEFT JOIN barang
+ON pembeli.id_barang=barang.id_barang;
+*/
+
+/*
+SELECT toko.id_toko, barang.nama_barang, barang.harga
+FROM toko
+RIGHT JOIN barang
+ON toko.id_toko = barang.id_toko
+ORDER BY toko.id_toko;
+*/
